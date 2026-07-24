@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ternary-Operator</title>
+</head>
+<body>
+    <h1 id="result"></h1>
+    <h1 id="result1"></h1>
+    <script>
+        let score = 100;
+        let grade;
+
+        if(score >= 80) {
+            grade = "Pass"
+            console.log(grade);
+        } else {
+            grade = "Fail";
+            console.log(grade);
+        }
+    document.getElementById("result").innerHTML = grade;
+
+        let score1 = 50;
+        let grade1 = (score1 >= 60) ? "Pass" : "Fail";
+        console.log(grade1);
+        document.getElementById("result1").innerHTML = grade1;
+    </script>
+</body>
+</html>

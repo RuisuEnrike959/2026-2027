@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Operators</title>
+</head>
+<body>
+<h1>Logical Operators</h1>
+<script>
+    let age = 25;
+    let isstudent = age >= 18;
+
+    console.log("is student: " + isstudent); // true
+
+    let attendance = 95;
+    let gpa = 3.5;
+
+    let passed = attendance >= 95 && gpa >= 3.0;
+    console.log("passed: " + passed); // true
+
+    let age1 = 18;
+    let haslicense = true;
+
+    let canDrive = (age1 >= 18 || haslicense) ? "yes" : "no";
+    console.log("the person can drive: " + canDrive); // yes
+
+    </script>
+</body>
+</html>

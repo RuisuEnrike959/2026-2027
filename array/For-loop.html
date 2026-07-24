@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Loop</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 16px; }
+        button { margin-right: 8px; }
+        #output { margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <h1>For Loop — Increment / Decrement</h1>
+    <div>
+        <button id="inc">Increment (0 → 10)</button>
+        <button id="dec">decrement (10 → 0)</button>
+        <button id="clear">clean</button>
+    </div>
+
+    <script>
+        const incBtn = document.getElementById('inc');
+        const decBtn = document.getElementById('dec');
+        const clearBtn = document.getElementById('clear');
+
+        incBtn.addEventListener('click', () => {
+            const arr = [];
+            for (let i = 0; i <= 10; i++) {
+                arr.push(i);
+            }
+            console.log('Increment (0 → 10):', arr);
+        });
+
+        decBtn.addEventListener('click', () => {
+            const arr = [];
+            for (let i = 10; i >= 0; i--) {
+                arr.push(i);
+            }
+            console.log('Decrement (10 → 0):', arr);
+        });
+
+        clearBtn.addEventListener('click', () => { console.clear(); console.log('Clear'); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4" crossorigin="anonymous"></script>
+    <title> Buttons Example</title>
+    </body>
+</head>
+<body>
+    <center style="padding-top: 50px;">
+        <button type="button" class="btn btn-primary" onclick="alert('Button 1 clicked!')">button 1</button>
+        
+        <button id="alertButton1" class="btn btn-secondary">button 2</button>
+
+        <button id="alertButton2" class="btn btn-success"> button 3</button>
+    </center>
+
+    <script>
+
+        document.getElementById("alertButton1").addEventListener("click", function() {alert("Button 1 clicked!");});
+            alert("Button 2 clicked!");
+        
+        document.getElementById("alertButton2").addEventListener("click", function() {alert("Button 2 clicked!");});
+            alert("Button 3 clicked!");
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4" crossorigin="anonymous"></script>
+</body>
+</html>

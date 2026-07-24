@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While Loop</title>
+</head>
+<body>
+    <h1>While Loop — Increment / Decrement</h1>
+    <div>
+        <button id="inc">Increment (0 → 10)</button>
+        <button id="dec">Decrement (10 → 0)</button>
+        <button id="clear">Clear</button>
+    </div>
+
+    <script>
+        const incBtn = document.getElementById('inc');
+        const decBtn = document.getElementById('dec');
+        const clearBtn = document.getElementById('clear');
+
+        incBtn.addEventListener('click', () => {
+            const arr = [];
+            let i = 0;
+            while (i <= 10) {
+                arr.push(i);
+                i++;
+            }
+            console.log('Increment (0 → 10):', arr);
+        });
+
+        decBtn.addEventListener('click', () => {
+            const arr = [];
+            let i = 10;
+            while (i >= 0) {
+                arr.push(i);
+                i--;
+            }
+            console.log('Decrement (10 → 0):', arr);
+        });
+
+        clearBtn.addEventListener('click', () => { console.clear(); console.log('clear'); });
+    </script>
+</body>
+</html>

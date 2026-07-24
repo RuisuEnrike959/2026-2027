@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Script Event Handling</title>
+<style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: blue; 
+        }
+    </style>
+</head>
+<body><center>
+    <h3 id="but">Click Here!</h3>
+    <button type="button" onclick="handleClick()">Click here please!</button>
+    <br>
+    <h3>MouseOver EventOne</h3>
+    <div id="box" onmouseover="changeColor()" onmouseout="resetColor()"></div>
+    <br>
+    <h3>MouseOver EventTwo</h3>
+    <img id="img" src="sky.jpg" alt="sky" onmouseover="changeImage()" onmouseout="resetImage()">
+    <br>
+    <h3>Keyboard Input</h3>
+    <input type="text" id="inputField" onkeyup="handleKeyUp()" placeholder="Type something...">
+    <p id="message"></p>
+
+    <script>
+        function handleClick() {
+            const button = document.getElementById("but");
+            button.innerHTML = "Button Clicked With Success!";
+            button.style.backgroundColor = "purple";
+            button.style.color = "white";
+            button.style.fontSize = "50px";
+        }
+
+        function changeColor() {
+            const box = document.getElementById("box");
+            box.style.backgroundColor = "yellow";
+        }
+
+        function resetColor() {
+            const box = document.getElementById("box");
+            box.style.backgroundColor = "blue";
+        }
+
+        function changeImage() {
+            const img = document.getElementById("img");
+            img.src = "sky.jpg";
+        }
+
+        function resetImage() {
+            const img = document.getElementById("img");
+            img.src = "off.jpg";
+        }
+
+        function handleKeyUp() {
+            const inputField = document.getElementById("inputField");
+            const message = document.getElementById("message");
+            message.textContent = `Your Words: ${inputField.value}`;
+        }
+
+    </script>
+    </center>
+</body>
+</html>

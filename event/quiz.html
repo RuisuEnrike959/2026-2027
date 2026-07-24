@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Form</title>
+    <style>
+        body {
+           font-family: Arial, sans-serif;
+           padding: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Quiz Form</h2>
+    <form id="quizForm">
+        <div class="question">
+            <label for="q1">1. What is the capital of France?</label><br>
+            <input type="text" id="q1" name="q1">
+        </div>
+        <div class="question">
+            <label for="q2">2. What is 2 + 2?</label><br>
+            <input type="text" id="q2" name="q2">
+        </div>
+        <div class="question">
+            <label for="q3">3. What is the color of the sky?</label><br>
+            <input type="text" id="q3" name="q3">
+            <div class="question">
+                <label for="q4">4. What is the largest planet in our solar system?</label><br>
+                <input type="text" id="q4" name="q4">
+        </div>
+        <script>
+            function submitQuiz() {
+                const q1 = document.getElementById("q1").value;
+                const q2 = document.getElementById("q2").value;
+                const q3 = document.getElementById("q3").value;
+                const q4 = document.getElementById("q4").value;
+
+                let score = 0;
+
+                if (q1.toLowerCase() === "paris") score++;
+                if (q2 === "4") score++;
+                if (q3.toLowerCase() === "blue") score++;
+                if (q4.toLowerCase() === "jupiter") score++;
+
+                alert("Your score is: " + score + "/4");
+            }
+        </script>
+        <button type="button" onclick="submitQuiz()">Submit</button>
+    </form>
+</body>
+</html>

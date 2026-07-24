@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="demo"></h1>
+    <h1 id="greet1"></h1>
+    <h1 id="result3"></h1>
+    <script>
+    // Function 1 - Returns basic information about a prefecture
+    function prefectureInfo(name) {
+        return "Prefecture: " + name;
+    }
+
+    console.log(prefectureInfo("Tokyo"));
+    document.getElementById("demo").innerHTML = prefectureInfo("Tokyo");
+
+    // Function 2 - Returns approximate population
+    function prefecturePopulation(prefecture, population) {
+        return prefecture + " has approximately " + population + " million inhabitants.";
+    }
+
+    console.log(prefecturePopulation("Osaka", 8.7));
+    document.getElementById("greet1").innerHTML = prefecturePopulation("Osaka", 8.7);
+
+    // Function 3 - Lists prefecture characteristics
+    function prefectureCharacteristic(name, characteristic) {
+        return name + " is known for: " + characteristic;
+    }
+
+    console.log(prefectureCharacteristic("Kyoto", "historic temples and tradition"));
+    document.getElementById("result3").innerHTML = prefectureCharacteristic("Kyoto", "historic temples and tradition");
+    </script>
+</body>
+</html>
