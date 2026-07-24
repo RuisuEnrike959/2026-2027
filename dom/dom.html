@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <center>
+    <h1 id="main-heading">DOM Manipulation Example 1</h1>
+    <button id="myButton">Change Heading</button>
+
+    <h1 id="text">DOM Manipulation Example 2</h1>
+    <button id="myButton2">Change color</button>
+
+    <h1 id="text2">DOM Manipulation Example 3</h1>
+    <button id="myButton3">Change color</button>
+
+    <h1 id="shibuya">shibuya.jpg</h1>
+    <img id="myImage" src="shibuya.jpg" alt="shibuya" width="500" height="600" style="display: none;">
+    <button id="myButton4">Show Image</button>
+
+    <div id="box"></div>
+    <button id="addbox">Add paragraph</button>
+
+    <p>i want you to <span id="deleteMe">delete me</span></p>
+    <button id="deleteButton">Delete Span</button>
+
+    <a id = "myLink" href="https://www.google.com" target="_blank">Go to Google</a>
+
+    <script>
+
+        document.getElementById('myLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default action of the link
+            alert('You clicked the link!'); // Show an alert message
+        });
+        
+        // First button - Change Heading
+        const button = document.getElementById('myButton');
+        const heading = document.getElementById('main-heading');
+        
+        button.addEventListener('click', function() {
+            heading.textContent = 'Heading Changed!';
+            heading.style.color = 'blue';
+        });
+
+        // Second button - Change color
+        const button2 = document.getElementById('myButton2');
+        const text = document.getElementById('text');
+        
+        button2.addEventListener('click', function() {
+            text.style.color = 'red';
+        });
+
+        // Third button - Change color and size
+        const button3 = document.getElementById('myButton3');
+        const text2 = document.getElementById('text2');
+
+        button3.addEventListener('click', function() {
+            text2.style.color = 'green';
+            text2.style.fontSize = '80px';
+        });
+
+        // Fourth button - Show/Hide Image
+        const button4 = document.getElementById('myButton4');
+        const image = document.getElementById('myImage');
+
+        button4.addEventListener('click', function() {
+            if (image.style.display === 'none') {
+                image.style.display = 'block';
+                button4.textContent = 'Hide Image';
+            } else {
+                image.style.display = 'none';
+                button4.textContent = 'Show Image';
+            }
+        });
+
+        // Add box - Add paragraph
+        const addboxButton = document.getElementById('addbox');
+        const box = document.getElementById('box');
+        
+        addboxButton.addEventListener('click', function() {
+            let h1 = document.createElement('h1');
+            h1.innerHTML = "DOM Manipulation Example 4";
+            h1.style.color = 'purple';
+            box.appendChild(h1);
+        });
+
+        // Delete element - Delete span
+        const deleteButton = document.getElementById('deleteButton');
+        const deleteMe = document.getElementById('deleteMe');
+
+        deleteButton.addEventListener('click', function() {
+            deleteMe.parentElement.removeChild(deleteMe);
+        });
+    </script>
+
+</center>   
+</body>
+</html>
