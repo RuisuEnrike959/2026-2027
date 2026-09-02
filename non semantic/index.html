@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #fff6f6, #f6fbff);
+      color: #3b1f1f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .page {
+      width: min(980px, 100%);
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 28px;
+      box-shadow: 0 25px 70px rgba(120, 50, 50, 0.18);
+      overflow: hidden;
+      border: 1px solid rgba(255, 180, 180, 0.45);
+    }
+
+    .hero {
+      padding: 42px 34px 26px;
+      text-align: center;
+      background: linear-gradient(135deg, #ffe4e4, #fff7f7);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: auto;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      color: #6b3a3a;
+    }
+
+    .top-bar {
+      margin: 24px auto 0;
+      max-width: 720px;
+      background: #f3cfcf;
+      padding: 13px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: inset 0 0 0 1px rgba(170, 80, 80, 0.15);
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 22px;
+      padding: 28px;
+    }
+
+    .side-card,
+    .content-card,
+    .footer-card {
+      background: #f9dada;
+      border-radius: 18px;
+      border: 1px solid rgba(170, 80, 80, 0.18);
+      box-shadow: 0 10px 25px rgba(100, 40, 40, 0.08);
+    }
+
+    .side-card {
+      min-height: 390px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      font-weight: bold;
+    }
+
+    .content-card {
+      padding: 22px;
+    }
+
+    .mini-label {
+      background: #f0bcbc;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .nested-box {
+      border: 2px solid rgba(215, 125, 125, 0.5);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+      background: rgba(255, 245, 245, 0.55);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .nested-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px rgba(120, 50, 50, 0.12);
+    }
+
+    .nested-box h2,
+    .nested-box h3 {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .inner-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .feature {
+      background: #ffecec;
+      border: 1px solid rgba(215, 125, 125, 0.55);
+      border-radius: 14px;
+      padding: 22px;
+      text-align: center;
+      min-height: 110px;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+    }
+
+    .wide-box {
+      margin-top: 14px;
+      background: #ffecec;
+      border: 1px solid rgba(215, 125, 125, 0.55);
+      border-radius: 14px;
+      padding: 22px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .footer-card {
+      margin: 0 28px 28px;
+      padding: 24px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #3b1f1f;
+      color: white;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 16px;
+      }
+
+      .main {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .side-card {
+        min-height: 180px;
+      }
+
+      .inner-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-card {
+        margin: 0 18px 18px;
+      }
+    }
+
+
+
+    </style>
+       
+</head>
+<body>
+    <div class="page">
+  <div class="hero">
+    <h1>&lt;div&gt; Layout Showcase</h1>
+    <p>
+      A clean, attractive single-page design inspired by a non-semantic HTML layout diagram.
+      This page uses regular HTML containers, soft colors, nested sections, and responsive styling.
+    </p>
+    <div class="top-bar">&lt;div&gt; Header Area</div>
+    <span class="tag">Responsive Single Webpage</span>
+  </div>
+
+  <div class="main">
+    <div class="side-card">&lt;div&gt;<br />Sidebar</div>
+
+    <div class="content-card">
+      <div class="mini-label">&lt;span&gt; Navigation / Label</div>
+
+      <div class="nested-box">
+        <h2>&lt;div&gt; Main Content</h2>
+
+        <div class="inner-grid">
+          <div class="feature">&lt;div&gt;<br />Feature One</div>
+          <div class="feature">&lt;div&gt;<br />Feature Two</div>
+        </div>
+
+        <div class="wide-box">&lt;div&gt; Highlight Section</div>
+      </div>
+
+      <div class="nested-box">
+        <h3>&lt;div&gt; Extra Information</h3>
+
+        <p style="line-height: 1.7; text-align: center; color: #6b3a3a;">
+          This section can be replaced with text, cards, images, buttons, or lesson content.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-card">&lt;div&gt; Footer Area</div>
+</div>
+</body>
+</html>

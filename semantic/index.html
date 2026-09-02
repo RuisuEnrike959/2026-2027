@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BIG CAMERA NIIGATA</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:center;padding:20px;background:linear-gradient(135deg,#fff6f6,#f6fbff);color:#3b1f1f}
+    .page{width:min(1050px,100%);background:rgba(255,255,255,.9);border-radius:20px;overflow:hidden;border:1px solid rgba(255,180,180,.45)}
+    .hero{padding:36px 24px;text-align:center;background:linear-gradient(135deg,#ffe4e4,#fff7f7)}
+    h1{font-size:clamp(1.8rem,4.5vw,3rem);margin-bottom:8px}
+    .top-bar{margin:18px auto 0;background:#f3cfcf;padding:10px;border-radius:10px;font-weight:700}
+    .tag{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;background:#3b1f1f;color:#fff;font-size:.9rem}
+    .main{display:grid;grid-template-columns:1fr 1.6fr;gap:18px;padding:20px}
+    .side-card,.content-card,.footer-card{background:#f9dada;border-radius:12px;padding:16px;border:1px solid rgba(170,80,80,.12)}
+    .side-item{background:rgba(255,255,255,.45);border-radius:10px;padding:12px;text-align:center;font-weight:700;margin-bottom:10px}
+    .mini-label{background:#f0bcbc;padding:8px;border-radius:8px;text-align:center;font-weight:700;margin-bottom:12px}
+    .nested-box{border:2px solid rgba(215,125,125,.4);border-radius:12px;padding:12px;margin-bottom:12px;background:rgba(255,245,245,.6)}
+    .inner-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .feature{background:#ffecec;border-radius:10px;padding:12px;text-align:center;font-weight:700}
+    .wide-box{margin-top:10px;background:#ffecec;padding:12px;border-radius:10px;text-align:center}
+    .visitor-text{line-height:1.6;text-align:center;color:#6b3a3a}
+    .jp{display:block;color:#7a3f3f;margin-top:6px}
+    footer.footer-card{text-align:center;font-weight:700}
+    @media(max-width:720px){.main{grid-template-columns:1fr}.inner-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <h1>BIG CAMERA NIIGATA</h1>
+      <p>Discover the latest electronics, cameras and Japanese tech.<br>新潟の中心で最新のカメラ・家電を体験してください。</p>
+      <div class="top-bar">Welcome to BIG CAMERA 新潟店</div>
+      <span class="tag">Japanese & English Experience</span>
+    </header>
+    <main class="main">
+      <aside class="side-card">
+        <div class="side-item">Cameras & Lenses<span class="jp">カメラ・レンズ</span></div>
+        <div class="side-item">Gaming Zone<span class="jp">ゲームコーナー</span></div>
+        <div class="side-item">Tax-Free Shopping<span class="jp">免税サービス</span></div>
+      </aside>
+      <section class="content-card" aria-labelledby="sg">
+        <div class="mini-label" id="sg">Store Guide ・ 店舗ガイド</div>
+        <div class="nested-box">
+          <h2>Featured Departments<span class="jp">人気セクション</span></h2>
+          <div class="inner-grid">
+            <div class="feature">Latest Cameras<span class="jp">最新カメラ</span></div>
+            <div class="feature">Smart Gadgets<span class="jp">スマートガジェット</span></div>
+          </div>
+          <div class="wide-box">Exclusive Deals &amp; Seasonal Discounts<br>限定セール・季節限定キャンペーン</div>
+        </div>
+        <div class="nested-box">
+          <h3>Visitor Information<span class="jp">お客様案内</span></h3>
+          <p class="visitor-text">Friendly multilingual support and a relaxing atmosphere.<br><br>多言語対応スタッフと快適なショッピング空間をご用意しています。</p>
+        </div>
+      </section>
+    </main>
+    <footer class="footer-card">BIG CAMERA NIIGATA ・ 新潟店<br>Electronics ・ Cameras ・ Gaming ・ Lifestyle</footer>
+  </div>
+</body>
+</html>

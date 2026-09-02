@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Camera Niigata</title>
+</head>
+<body>
+<center>
+    <h1>Big Camera Niigata</h1>
+    <p>Choose a Niigata store product / 新潟店の商品を選んでください</p>
+    <label for="demoSelect">Product / 商品:</label>
+    <select name="demoSelect" id="demoSelect">
+        <option>Sony Alpha 7 IV</option>
+        <option>Panasonic 4K TV</option>
+        <option>MacBook Air</option>
+        <option>Dyson V12</option>
+    </select>
+
+    <label for="demoSelect1">Default product / デフォルト商品:</label>
+    <select name="demoSelect1" id="demoSelect1">
+        <option value="option1">Option 1 — Sony Alpha 7 IV</option>
+        <option value="option2" selected>Option 2 — Panasonic 4K TV</option>
+        <option value="option3">Option 3 — MacBook Air</option>
+        <option value="option4">Option 4 — Dyson V12</option>
+    </select>
+
+    <p id="selectedText">Selected: Panasonic 4K TV</p>
+</center>
+<script>
+    const demoSelect = document.getElementById('demoSelect');
+    const demoSelect1 = document.getElementById('demoSelect1');
+    const selectedText = document.getElementById('selectedText');
+
+    function updateText() {
+        const value1 = demoSelect.value || 'none';
+        const value2 = demoSelect1.options[demoSelect1.selectedIndex].text;
+        selectedText.textContent = `Selected: ${value1} / ${value2}`;
+    }
+
+    demoSelect.addEventListener('change', updateText);
+    demoSelect1.addEventListener('change', updateText);
+</script>
+</body>
+</html>

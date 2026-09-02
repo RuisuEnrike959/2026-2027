@@ -1,0 +1,50 @@
+.red-box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  color: white;
+}
+
+.green-box {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  color: white;
+}
+
+.blue-box {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+    color: white;
+}
+.yellow-box {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  color: white;
+}
+.cyan-box {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to right, rgb(92, 58, 58), rgb(236, 236, 73), white);
+  color: black;
+}
+.magenta-box {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to left, blue, orange, green);
+  color: magenta;
+}
+.black-box {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  color: white;
+}
+.white-box {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to right, red, yellow, white);
+  color: black;
+}
