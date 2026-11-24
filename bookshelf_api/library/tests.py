@@ -1,15 +1,34 @@
 import base64, json
+import importlib
 from io import BytesIO
 import tempfile
+
 from django.contrib.auth.models import Group, User
+from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase, override_settings
-from django.urls import reverse
+from django.test import SimpleTestCase, TestCase, override_settings
+from django.urls import clear_url_caches, resolve, reverse
 from PIL import Image
 from rest_framework.renderers import JSONRenderer
 from rest_framework.test import APIClient
 from .models import Author, Book, Review
 from .serializers import AuthorSerializer, BookSerializer
+
+
+class MediaServingTests(SimpleTestCase):
+    def test_media_url_is_routed_in_debug_mode(self):
+        urlconf = importlib.import_module(settings.ROOT_URLCONF)
+        original_debug = settings.DEBUG
+        try:
+            with override_settings(DEBUG=True):
+                importlib.reload(urlconf)
+                clear_url_caches()
+                resolved = resolve("/media/book_covers/cover.jpg")
+                self.assertEqual(resolved.func.__module__, "django.views.static")
+        finally:
+            with override_settings(DEBUG=original_debug):
+                importlib.reload(urlconf)
+                clear_url_caches()
 
 
 class HomePageTests(TestCase):
