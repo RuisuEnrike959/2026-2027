@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }} — Campus{% endblock %}
+
+{% block content %}
+  <section class="intro" aria-labelledby="page-title">
+    <div>
+      <p class="eyebrow"><span class="eyebrow-line"></span> STUDENT RECORD</p>
+      <h1 id="page-title">{{ page_title|capfirst }}<br><span>details.</span></h1>
+      <p class="intro-copy">Enter the student information below. Their enrollment date is added automatically.</p>
+    </div>
+  </section>
+
+  <section class="form-panel">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="form-error" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+      {% for field in form %}
+        <div class="form-field">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}<small class="field-help">{{ field.help_text }}</small>{% endif %}
+          {% for error in field.errors %}<p class="form-error" role="alert">{{ error }}</p>{% endfor %}
+        </div>
+      {% endfor %}
+      <div class="dialog-actions">
+        <a class="button button-secondary" href="{% url 'students:list' %}">Cancel</a>
+        <button class="button button-primary" type="submit">{% if student %}Save changes{% else %}Save student{% endif %}</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}

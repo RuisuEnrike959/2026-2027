@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="intro" aria-labelledby="page-title">
+    <div>
+      <p class="eyebrow"><span class="eyebrow-line"></span> FULL-STACK DEVELOPMENT <span class="eyebrow-separator">·</span> LESSON 04</p>
+      <h1 id="page-title">Student management,<br><span>made simple.</span></h1>
+      <p class="intro-copy">Keep student records organized and see how a Django model becomes a PostgreSQL table.</p>
+    </div>
+    <a class="button button-primary" href="{% url 'students:create' %}"><span class="button-plus" aria-hidden="true">+</span> Add student</a>
+  </section>
+
+  <section class="stats-grid" aria-label="Student summary">
+    <article class="stat-card">
+      <div class="stat-icon stat-icon-blue" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m16 0v-2a4 4 0 0 0-3-3.87M14 3.13a4 4 0 0 1 0 7.75M14 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg>
+      </div>
+      <div><p class="stat-label">Total students</p><p class="stat-value">{{ total_students }}</p></div>
+      <span class="stat-caption">in your records</span>
+    </article>
+    <article class="stat-card">
+      <div class="stat-icon stat-icon-green" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v11h14V9M9 20v-6h6v6"/></svg>
+      </div>
+      <div><p class="stat-label">Courses</p><p class="stat-value">{{ total_courses }}</p></div>
+      <span class="stat-caption">unique programs</span>
+    </article>
+    <article class="stat-card">
+      <div class="stat-icon stat-icon-orange" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <div><p class="stat-label">Average age</p><p class="stat-value">{{ average_age|default:"—" }}</p></div>
+      <span class="stat-caption">years old</span>
+    </article>
+  </section>
+
+  <section class="students-panel" id="students" aria-labelledby="students-title">
+    <div class="panel-heading">
+      <div>
+        <h2 id="students-title">All students <span class="heading-count">{{ total_students }}</span></h2>
+        <p>View and manage your student records.</p>
+      </div>
+      <form class="search-box" method="get" action="{% url 'students:list' %}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <label class="visually-hidden" for="student-search">Search students</label>
+        <input id="student-search" name="q" type="search" value="{{ query }}" placeholder="Search students..." autocomplete="off">
+        <button class="search-submit" type="submit">Search</button>
+      </form>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">STUDENT</th><th scope="col">COURSE</th><th scope="col">AGE</th><th scope="col">ENROLLED</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+            <tr>
+              <td>
+                <div class="student-cell">
+                  <span class="student-avatar">{{ student.name|first|upper }}</span>
+                  <div><p class="student-name">{{ student.name }}</p><p class="student-email">{{ student.email }}</p></div>
+                </div>
+              </td>
+              <td><span class="course-pill">{{ student.course }}</span></td>
+              <td class="age-label">{{ student.age }}</td>
+              <td>{{ student.enrolled_date|date:"M j, Y" }}</td>
+              <td>
+                <span class="action-group">
+                  <a class="icon-button" href="{% url 'students:update' student.pk %}" aria-label="Edit {{ student.name }}" title="Edit student">✎</a>
+                  <form method="post" action="{% url 'students:delete' student.pk %}" onsubmit="return confirm('Delete this student record?');">
+                    {% csrf_token %}
+                    <button class="icon-button delete-button" type="submit" aria-label="Delete {{ student.name }}" title="Delete student">×</button>
+                  </form>
+                </span>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td class="empty-cell" colspan="5"><div class="empty-state"><span class="empty-icon" aria-hidden="true">⌕</span><h3>No students found</h3><p>Try a different search or add a new student.</p></div></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="table-footer"><span>Showing {{ students|length }}{% if query %} matching{% endif %} of {{ total_students }} student{{ total_students|pluralize }}</span><span>Student records <span class="footer-dot">·</span> Django database</span></div>
+  </section>
+
+  <section class="database-section" id="database" aria-labelledby="database-title">
+    <div class="database-heading">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-line"></span> UNDER THE HOOD</p>
+        <h2 id="database-title">From Python model to database table.</h2>
+        <p class="database-copy">Django models describe your data. Migrations turn those descriptions into PostgreSQL tables.</p>
+      </div>
+      <span class="database-badge"><span aria-hidden="true">●</span> DJANGO + POSTGRESQL</span>
+    </div>
+    <div class="concept-grid">
+      <article class="concept-card">
+        <div class="concept-card-top"><span class="concept-icon model-icon" aria-hidden="true">Py</span><span class="concept-step">01 / MODEL</span></div>
+        <h3>Define the student</h3><p>A Python class describes the fields each student record needs.</p>
+        <div class="field-list"><span>name <small>text</small></span><span>email <small>unique</small></span><span>age <small>number</small></span><span>course <small>text</small></span><span>phone <small>optional</small></span></div>
+      </article>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <article class="concept-card">
+        <div class="concept-card-top"><span class="concept-icon migration-icon" aria-hidden="true">↗</span><span class="concept-step">02 / MIGRATION</span></div>
+        <h3>Apply the change</h3><p>Migrations keep your database structure in sync with your model.</p>
+        <div class="code-steps"><code>python manage.py makemigrations</code><code>python manage.py migrate</code></div>
+      </article>
+      <div class="flow-arrow" aria-hidden="true">→</div>
+      <article class="concept-card">
+        <div class="concept-card-top"><span class="concept-icon db-icon" aria-hidden="true">▤</span><span class="concept-step">03 / POSTGRESQL</span></div>
+        <h3>Store student records</h3><p>Your PostgreSQL table stores each student as a row.</p>
+        <div class="table-preview"><span>id</span><span>name</span><span>email</span><span>…</span></div>
+      </article>
+    </div>
+    <div class="crud-strip"><span class="crud-label">DJANGO ORM</span><code>Student.objects.create()</code><span class="crud-divider">→</span><code>.all()</code><span class="crud-divider">→</span><code>.save()</code><span class="crud-divider">→</span><code>.delete()</code><span class="crud-caption">Create · Read · Update · Delete</span></div>
+  </section>
+{% endblock %}
