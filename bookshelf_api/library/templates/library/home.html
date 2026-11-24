@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#142d4e">
+    <title>Bookshelf API</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #172b4d;
+            --muted: #64748b;
+            --blue: #3157c8;
+            --paper: #f5f7fc;
+            --line: #e4e9f2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-width: 320px;
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        a:focus-visible {
+            outline: 3px solid #f4b942;
+            outline-offset: 4px;
+        }
+
+        .site-header {
+            color: white;
+            background: #142d4e;
+        }
+
+        .header-inner,
+        main,
+        .site-footer {
+            width: min(1080px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .header-inner {
+            display: flex;
+            min-height: 76px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .api-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .api-nav a,
+        .api-nav button {
+            padding: 8px 13px;
+            border: 1px solid rgb(255 255 255 / 25%);
+            border-radius: 999px;
+            color: white;
+            background: transparent;
+            font-size: 0.9rem;
+            font-family: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 180ms ease, border-color 180ms ease;
+        }
+
+        .api-nav a:hover,
+        .api-nav button:hover {
+            border-color: white;
+            background: rgb(255 255 255 / 14%);
+        }
+
+        main {
+            padding: 36px 0 56px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(32px, 7vw, 72px);
+            border-radius: 24px;
+            color: white;
+            background: linear-gradient(120deg, #17345b, #3157c8 58%, #6d79d8);
+            box-shadow: 0 18px 45px rgb(34 58 110 / 18%);
+            animation: fade-up 650ms ease both;
+        }
+
+        .hero::after {
+            position: absolute;
+            top: -110px;
+            right: -60px;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgb(255 255 255 / 18%);
+            border-radius: 50%;
+            box-shadow: 0 0 0 36px rgb(255 255 255 / 5%), 0 0 0 72px rgb(255 255 255 / 4%);
+            content: "";
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: #d7e3ff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            max-width: 600px;
+            margin: 0;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.08;
+        }
+
+        .hero-copy {
+            max-width: 560px;
+            margin: 18px 0 0;
+            color: #e1e9ff;
+            font-size: 1.05rem;
+        }
+
+        .hero-copy[lang="ja"] {
+            margin-top: 6px;
+            font-size: 0.95rem;
+        }
+
+        .hero-action {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 11px 18px;
+            border-radius: 8px;
+            color: #17345b;
+            background: white;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .hero-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgb(0 0 0 / 18%);
+        }
+
+        .content-section {
+            margin-top: 48px;
+            animation: fade-up 650ms ease both;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: clamp(1.45rem, 4vw, 2rem);
+            line-height: 1.25;
+        }
+
+        .section-heading p {
+            margin: 5px 0 0;
+            color: var(--muted);
+        }
+
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 22px;
+        }
+
+        .book-card {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: white;
+            box-shadow: 0 5px 18px rgb(23 43 77 / 5%);
+            transition: transform 200ms ease, box-shadow 200ms ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px rgb(23 43 77 / 13%);
+        }
+
+        .book-cover-link {
+            display: block;
+            overflow: hidden;
+            background: #edf1fa;
+        }
+
+        .book-cover {
+            display: block;
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            transition: transform 250ms ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.035);
+        }
+
+        .cover-placeholder {
+            display: grid;
+            place-content: center;
+            gap: 4px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .book-info {
+            padding: 16px;
+        }
+
+        .book-info h3 {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.35;
+        }
+
+        .book-info h3 a {
+            text-decoration: none;
+        }
+
+        .book-info h3 a:hover,
+        .text-link:hover {
+            color: var(--blue);
+        }
+
+        .book-info p {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .empty-state {
+            padding: 28px;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px;
+            background: white;
+            color: var(--muted);
+        }
+
+        .empty-state p {
+            margin: 4px 0;
+        }
+
+        .admin-note {
+            margin-top: 26px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .text-link {
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        .site-footer {
+            padding: 20px 0 32px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .site-footer p {
+            margin: 4px 0;
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: center;
+                padding: 16px 0;
+            }
+
+            .api-nav {
+                gap: 6px;
+            }
+
+            .api-nav a,
+            .api-nav button {
+                padding: 6px 10px;
+                font-size: 0.82rem;
+            }
+
+            main {
+                padding-top: 22px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .book-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .book-cover {
+                height: 190px;
+            }
+
+            .book-info {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .book-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="/">Bookshelf API</a>
+            <nav class="api-nav" aria-label="Catalog and API lists">
+                <a href="{% url 'catalog-books' %}">Books</a>
+                <a href="{% url 'catalog-reviews' %}">Reviews</a>
+                {% if can_access_api %}
+                    <a href="/api/books/">Books API</a>
+                    <a href="/api/authors/">Authors API</a>
+                    <a href="/api/reviews/">Reviews API</a>
+                {% endif %}
+                {% if is_bookshelf_admin %}<a href="/admin/">Django admin</a>{% endif %}
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Log out</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">Log in</a>
+                    <a href="{% url 'signup' %}">Sign up</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <p class="eyebrow">Discover your next read</p>
+            <h1>Books, authors, and stories.</h1>
+            <p class="hero-copy">A simple API for exploring books, authors, and reviews.</p>
+            <p class="hero-copy" lang="ja">本、著者、レビューを閲覧するためのシンプルなAPIです。</p>
+            <a class="hero-action" href="#featured-books">Explore the API</a>
+        </section>
+
+        <section class="content-section" aria-labelledby="featured-books">
+            <div class="section-heading">
+                <div>
+                    {% if is_catalog %}
+                        <h2 id="featured-books">All books</h2>
+                        <p lang="ja">すべての本</p>
+                    {% else %}
+                        <h2 id="featured-books">Books on the home page</h2>
+                        <p lang="ja">ホームページの本</p>
+                    {% endif %}
+                </div>
+                {% if not is_catalog %}
+                    <a class="text-link" href="{% url 'catalog-books' %}">Browse all books &rarr;</a>
+                {% endif %}
+            </div>
+
+            {% if books %}
+                <div class="book-list">
+                    {% for book in books %}
+                        <article class="book-card">
+                            <a class="book-cover-link" href="{% url 'catalog-book-detail' book.id %}">
+                                {% if book.cover_image %}
+                                    <img class="book-cover" src="{{ book.cover_image.url }}" alt="Cover of {{ book.title }}">
+                                {% else %}
+                                    <div class="book-cover cover-placeholder" role="img" aria-label="No cover image">
+                                        <span>No cover image</span>
+                                        <span lang="ja">表紙画像はありません</span>
+                                    </div>
+                                {% endif %}
+                            </a>
+                            <div class="book-info">
+                                <h3><a href="{% url 'catalog-book-detail' book.id %}">{{ book.title }}</a></h3>
+                                <p>{{ book.author.name }}</p>
+                                <p>{{ book.published_year }}</p>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    {% if is_catalog %}
+                        <p>No books have been added yet.</p>
+                        <p lang="ja">本はまだ登録されていません。</p>
+                    {% else %}
+                        <p>No books selected yet. In the Django admin, edit a book and select “Show on home page”.</p>
+                        <p lang="ja">まだ本が選択されていません。Django管理画面で本を編集し、「Show on home page」にチェックを入れてください。</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
+
+        {% if not is_catalog %}
+            <section class="content-section" aria-labelledby="featured-authors">
+                <div class="section-heading">
+                    <div>
+                        <h2 id="featured-authors">Authors</h2>
+                        <p lang="ja">著者</p>
+                    </div>
+                </div>
+
+                {% if authors %}
+                    <div class="book-list author-list">
+                        {% for author in authors %}
+                            <article class="book-card author-card">
+                                <div class="book-info">
+                                    <h3><a href="{% url 'catalog-author-detail' author.id %}">{{ author.name }}</a></h3>
+                                    {% if author.country %}<p>{{ author.country }}</p>{% endif %}
+                                    {% if author.birth_year %}<p>Born {{ author.birth_year }}</p>{% endif %}
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <p>No authors have been added yet.</p>
+                        <p lang="ja">著者はまだ登録されていません。</p>
+                    </div>
+                {% endif %}
+            </section>
+        {% endif %}
+
+        {% if is_bookshelf_admin %}
+            <p class="admin-note">To manage the books on this page, visit the <a class="text-link" href="/admin/">admin panel</a>.</p>
+            <p class="admin-note" lang="ja">このページの本を管理するには、<a class="text-link" href="/admin/">管理画面</a>をご利用ください。</p>
+        {% endif %}
+    </main>
+
+    <footer class="site-footer">
+        <p>Bookshelf API &middot; A simple book catalog</p>
+        <p lang="ja">Bookshelf API ・ シンプルな本のカタログ</p>
+    </footer>
+</body>
+</html>
