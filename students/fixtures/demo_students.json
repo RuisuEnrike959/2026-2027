@@ -1,0 +1,62 @@
+[
+  {
+    "model": "students.student",
+    "pk": 1,
+    "fields": {
+      "name": "Juan Dela Cruz",
+      "email": "juan@example.com",
+      "age": 21,
+      "course": "Full-Stack",
+      "enrolled_date": "2026-11-19",
+      "phone": ""
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 2,
+    "fields": {
+      "name": "Maria Santos",
+      "email": "maria@example.com",
+      "age": 22,
+      "course": "Frontend",
+      "enrolled_date": "2026-11-19",
+      "phone": ""
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 3,
+    "fields": {
+      "name": "Ana Reyes",
+      "email": "ana@example.com",
+      "age": 23,
+      "course": "Full-Stack",
+      "enrolled_date": "2026-11-19",
+      "phone": "090-1111-2222"
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 4,
+    "fields": {
+      "name": "Ken Suzuki",
+      "email": "ken@example.com",
+      "age": 19,
+      "course": "Backend",
+      "enrolled_date": "2026-11-19",
+      "phone": "090-3333-4444"
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 5,
+    "fields": {
+      "name": "Lisa Garcia",
+      "email": "lisa@example.com",
+      "age": 24,
+      "course": "Frontend",
+      "enrolled_date": "2026-11-19",
+      "phone": "090-5555-6666"
+    }
+  }
+]
